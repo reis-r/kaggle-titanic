@@ -140,7 +140,9 @@ data: the data series to add."
   (setv model (Sequential))
   (.add model (Dense 9 :input-dim input-size :activation "relu"))
   (.add model (BatchNormalization))
-  (.add model (Dense 21 :activation "relu"))
+  (.add model (Dense 9 :activation "relu"))
+  (.add model (Dense 9 :activation "relu"))
+  (.add model (Dense 9 :activation "relu"))
   (.add model (Dense 2 :activation "softmax"))
   (.compile model :optimizer "adam"
             :loss "categorical_crossentropy"
