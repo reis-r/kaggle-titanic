@@ -6,7 +6,7 @@
         [matplotlib.pyplot :as plt]
         [sklearn.model_selection [train_test_split]]
         [tensorflow.keras.models [Sequential]]
-        [tensorflow.keras.layers [Dense]])
+        [tensorflow.keras.layers [Dense BatchNormalization]])
 
 ;; Data processing
 ;; Feature engineering
@@ -139,7 +139,8 @@ data: the data series to add."
   "A description for the neural network model."
   (setv model (Sequential))
   (.add model (Dense 9 :input-dim input-size :activation "relu"))
-  (.add model (Dense 13 :activation "relu"))
+  (.add model (BatchNormalization))
+  (.add model (Dense 21 :activation "relu"))
   (.add model (Dense 2 :activation "softmax"))
   (.compile model :optimizer "adam"
             :loss "categorical_crossentropy"
@@ -156,7 +157,7 @@ data: the data series to add."
   (setv [X-train X-val y-train y-val]
         (split-train-validation train))
   (setv model (build-model (second X-train.shape)))
-  (setv history (train-model model X-train X-val y-train y-val :epochs 800))
+  (setv history (train-model model X-train X-val y-train y-val :epochs 1000))
   (setv predictions (.predict-classes model test))
   (setv result (pd.DataFrame { "PassengerId" (get test-file "PassengerId")
                               "Survived" predictions}))
