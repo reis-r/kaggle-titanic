@@ -167,3 +167,5 @@ data: the data series to add."
                  :encoding "utf-8"
                  :index False)
   (plot-accuracy history))
+
+(main)
